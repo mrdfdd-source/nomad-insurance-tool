@@ -88,6 +88,8 @@ body {
 .welcome-text {
     font-size: 17px;
     color: var(--text-main);
+    margin: 28px 0;
+    line-height: 1.5;
 }
 
 .friendly-question {
@@ -155,9 +157,11 @@ body {
 
 /* Chat styles */
 .chat-wrapper {
-    height: 390px;
+    min-height: 150px;
+    max-height: 400px;
     position: relative;
     text-align: left;
+    margin-bottom: 25px;
 }
 
 .chat-history {
@@ -187,9 +191,9 @@ body {
 }
 
 .chat-bubble.bot {
-    background: var(--card-bg);
+    background: #F8FAF6;
     color: var(--text-main);
-    border: 1px solid var(--border);
+    border: 1px solid #E2EADF;
     align-self: flex-start;
     border-bottom-left-radius: 4px; 
 }
@@ -232,20 +236,24 @@ body {
 
 /* Secondary Button / Chat Options */
 .option-btn {
-    background: var(--btn-secondary);
-    border: 1px solid transparent; /* No strong border for secondary */
-    border-radius: 12px;
+    background: var(--card-bg);
+    border: 2px solid var(--border);
+    border-radius: 14px;
     padding: 16px;
     font-size: 16px;
-    font-weight: 600;
-    color: var(--text-main);
+    font-weight: 700;
+    color: var(--primary);
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.2s ease;
     text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.02);
 }
 
 .option-btn:hover {
-    background: #e6e2db;
+    border-color: var(--primary);
+    background: #F8FAF6;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(45, 80, 22, 0.08);
 }
 
 .chat-input-wrapper {

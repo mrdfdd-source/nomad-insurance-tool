@@ -245,8 +245,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function startQuiz() {
     switchScreen('welcomeScreen', 'chatContainer');
-    const sub = document.getElementById('subtitle');
-    if (sub) sub.innerText = 'Custom Match Questionnaire';
     askQuestion();
     updateProgress();
 }
@@ -273,6 +271,11 @@ function askQuestion() {
     }
 
     const qData = questions[currentQuestion];
+    
+    // Update dynamic subtitle hook
+    const sub = document.getElementById('subtitle');
+    if (sub) sub.innerText = 'Question ' + (currentQuestion + 1) + ' of ' + questions.length;
+
     const optionsContainer = document.getElementById('optionsContainer');
     optionsContainer.innerHTML = "";
 
