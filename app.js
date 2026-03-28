@@ -245,6 +245,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function startQuiz() {
     switchScreen('welcomeScreen', 'chatContainer');
+    const sub = document.getElementById('subtitle');
+    if (sub) sub.innerText = 'Custom Match Questionnaire';
     askQuestion();
     updateProgress();
 }
@@ -409,6 +411,8 @@ function scrollToBottom() {
 
 function finishQuiz() {
     switchScreen('chatContainer', 'loadingScreen');
+    const sub = document.getElementById('subtitle');
+    if (sub) sub.innerText = 'Calculating matches...';
 
     setTimeout(() => {
         const { topThree, hasMedical } = calculateTopThree();
@@ -417,6 +421,10 @@ function finishQuiz() {
         switchScreen('loadingScreen', 'resultScreen');
         const pb = document.getElementById('progressBar');
         if (pb) pb.style.width = "100%";
+        
+        if (sub) sub.innerText = 'Here are your 3 results';
+        const h1 = document.getElementById('mainH1');
+        if (h1) h1.style.display = 'none';
     }, 2500);
 }
 
@@ -507,6 +515,11 @@ function restartQuiz() {
 
     const pb = document.getElementById('progressBar');
     if (pb) pb.style.width = '0%';
+    
+    const sub = document.getElementById('subtitle');
+    if (sub) sub.innerText = '4 questions. 3 matches.';
+    const h1 = document.getElementById('mainH1');
+    if (h1) h1.style.display = '';
 
     ['chatContainer', 'loadingScreen', 'resultScreen'].forEach(id => {
         const el = document.getElementById(id);

@@ -52,7 +52,7 @@ body {
     border-radius: 20px;
     padding: 40px 30px;
     box-shadow: var(--shadow);
-    text-align: left;
+    text-align: center;
     transition: all 0.3s ease;
     border: 1px solid var(--border);
 }
@@ -509,7 +509,7 @@ body {
 .disclaimer-text {
     font-size: 12px;
     color: var(--text-muted);
-    text-align: left;
+    text-align: center;
     margin-top: 16px;
     line-height: 1.6;
     padding: 0 10px;
