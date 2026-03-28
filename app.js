@@ -244,7 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function startQuiz() {
-    switchScreen('welcome-screen', 'chat-screen');
+    switchScreen('welcomeScreen', 'chatContainer');
     askQuestion();
     updateProgress();
 }
@@ -408,13 +408,13 @@ function scrollToBottom() {
 }
 
 function finishQuiz() {
-    switchScreen('chat-screen', 'loading-screen');
+    switchScreen('chatContainer', 'loadingScreen');
 
     setTimeout(() => {
         const { topThree, hasMedical } = calculateTopThree();
         renderResults(topThree, hasMedical);
 
-        switchScreen('loading-screen', 'results-screen');
+        switchScreen('loadingScreen', 'resultScreen');
         const pb = document.getElementById('progressBar');
         if (pb) pb.style.width = "100%";
     }, 2500);
@@ -508,11 +508,11 @@ function restartQuiz() {
     const pb = document.getElementById('progressBar');
     if (pb) pb.style.width = '0%';
 
-    ['chat-screen', 'loading-screen', 'results-screen'].forEach(id => {
+    ['chatContainer', 'loadingScreen', 'resultScreen'].forEach(id => {
         const el = document.getElementById(id);
         if(el) el.classList.remove('active');
     });
     
-    const welcome = document.getElementById('welcome-screen');
+    const welcome = document.getElementById('welcomeScreen');
     if(welcome) welcome.classList.add('active');
 }
