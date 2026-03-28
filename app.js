@@ -1,114 +1,113 @@
 // ============================================================
-// DATA: Insurance Companies Pool (6 companies)
-// Each company has scores for every possible answer value.
+// DATA: Global Insurance Companies Pool
 // ============================================================
 const companies = [
     {
         id: 'safetywing',
         name: 'SafetyWing',
         titleClass: 'company-title-safetywing',
-        ribbon: 'הפופולרית אצל נוודים',
+        ribbon: 'Nomad Favorite',
         ribbonClass: 'popular',
         affiliateUrl: 'https://safetywing.com/?referenceID=26500665&utm_source=26500665&utm_medium=Ambassador',
-        description: 'מנוי חודשי גמיש שמפסיק ביום החזרה. המודל האהוב על נוודים ארוכי טווח בכל העולם — ~42$ לחודש.',
+        description: 'Flexible monthly subscription that covers you in 190 countries. The #1 choice for long-term digital nomads. ~$45/month.',
         modalName: 'SafetyWing',
         scores: {
-            'long':            3,
+            'long':            4,
             'short':          -1,
             'expensive-gear':  0,
             'basic-gear':      2,
-            'extreme':        -1,
-            'chill':           1
-        }
-    },
-    {
-        id: 'passportcard',
-        name: 'PassportCard',
-        titleClass: 'company-title-passport',
-        ribbon: 'הכי מקיפה בשטח',
-        ribbonClass: 'comprehensive',
-        affiliateUrl: 'https://ticket.passportcard.co.il',
-        description: 'משלמת ישירות לבית החולים — ללא השתתפות עצמית ובלי בירוקרטיה. שקט נפשי מוחלט לטיולים ארוכים.',
-        modalName: 'PassportCard',
-        scores: {
-            'long':            2,
-            'short':           0,
-            'expensive-gear':  3,
-            'basic-gear':      0,
-            'extreme':         2,
-            'chill':           0
+            'extreme':        -2,
+            'chill':           2
         }
     },
     {
         id: 'worldnomads',
         name: 'World Nomads',
         titleClass: 'company-title-worldnomads',
-        ribbon: 'הטובה ביותר לספורט אתגרי',
+        ribbon: 'Best for Adventure',
         ribbonClass: 'extreme-sport',
         affiliateUrl: 'https://www.worldnomads.com',
-        description: 'מכסה מעל 200 פעילויות ספורט כולל צלילה, רכיבת אופנוע וטרקים. הבחירה היחידה האמיתית לאדרנלין ג\'אנקים.',
+        description: 'Covers over 200 adventure sports including scuba diving, motorbiking, and trekking. High coverage for expensive tech gear.',
         modalName: 'World Nomads',
         scores: {
             'long':            1,
             'short':           1,
-            'expensive-gear':  2,
+            'expensive-gear':  3,
             'basic-gear':      0,
             'extreme':         5,
             'chill':          -2
         }
     },
     {
-        id: 'phoenix',
-        name: 'הפניקס Smart',
+        id: 'heymondo',
+        name: 'Heymondo',
+        titleClass: 'company-title-clal', // Reusing color classes
+        ribbon: 'Best Tech & App',
+        ribbonClass: 'comprehensive',
+        affiliateUrl: 'https://heymondo.com',
+        description: 'Excellent global medical coverage with a 24/7 doctor chat app and zero out-of-pocket expenses for medical emergencies.',
+        modalName: 'Heymondo',
+        scores: {
+            'long':            2,
+            'short':           3,
+            'expensive-gear':  1,
+            'basic-gear':      1,
+            'extreme':         1,
+            'chill':           2
+        }
+    },
+    {
+        id: 'faye',
+        name: 'Faye',
         titleClass: 'company-title-phoenix',
-        ribbon: 'הכי משתלמת בכיס',
-        ribbonClass: 'cheap',
-        affiliateUrl: 'https://fnx.co.il',
-        description: 'תמחור הוגן לטיולים קצרים, בעיקר לאירופה. כיסוי ביטולי טיסות ופציעות קלות — בלי לשלם על עודפים.',
-        modalName: 'הפניקס Smart',
+        ribbon: 'US Residents Top Pick',
+        ribbonClass: 'value',
+        affiliateUrl: 'https://withfaye.com',
+        description: '100% digital, App-first travel insurance with instant claims payouts via Faye Wallet. Excellent coverage for flight delays and baggage.',
+        modalName: 'Faye',
         scores: {
             'long':           -1,
-            'short':           3,
-            'expensive-gear':  0,
+            'short':           4,
+            'expensive-gear':  2,
             'basic-gear':      1,
             'extreme':        -1,
             'chill':           2
         }
     },
     {
-        id: 'clal',
-        name: 'כלל ביטוח',
-        titleClass: 'company-title-clal',
-        ribbon: 'ערך גבוה למטייל',
-        ribbonClass: 'value',
-        affiliateUrl: 'https://www.clal-ins.co.il',
-        description: 'ביטוח ישראלי עם סכומי כיסוי גבוהים ותמחור תחרותי. מצוין לטיולים קצרים עד בינוניים, בעיקר לאירופה.',
-        modalName: 'כלל ביטוח',
+        id: 'genki',
+        name: 'Genki',
+        titleClass: 'company-title-passport',
+        ribbon: 'Long-Term Health',
+        ribbonClass: 'local',
+        affiliateUrl: 'https://genki.world',
+        description: 'True health insurance (not just travel) for expats and digital nomads. Covers routine checkups and unlimited medical limits.',
+        modalName: 'Genki',
         scores: {
-            'long':            0,
-            'short':           2,
+            'long':            5,
+            'short':          -2,
+            'expensive-gear':  0,
+            'basic-gear':      0,
+            'extreme':         1,
+            'chill':           0
+        }
+    },
+    {
+        id: 'img',
+        name: 'IMG Global',
+        titleClass: 'company-title-harel',
+        ribbon: 'Traditional & Secure',
+        ribbonClass: 'cheap',
+        affiliateUrl: 'https://www.imglobal.com',
+        description: 'Highly established global provider offering robust medical plans specifically tailored for long-term expatriates worldwide.',
+        modalName: 'IMG Global',
+        scores: {
+            'long':            2,
+            'short':           1,
             'expensive-gear':  0,
             'basic-gear':      1,
             'extreme':         0,
             'chill':           1
-        }
-    },
-    {
-        id: 'harel',
-        name: 'הראל ביטוח',
-        titleClass: 'company-title-harel',
-        ribbon: 'שירות ישראלי 24/7',
-        ribbonClass: 'local',
-        affiliateUrl: 'https://www.harel-group.co.il',
-        description: 'ביטוח חברה ישראלית מוכרת עם כיסוי ציוד, רכוש ובריאות. תמיכה בעברית בכל שעה — מושלם אם חשוב לך השירות.',
-        modalName: 'הראל ביטוח',
-        scores: {
-            'long':            0,
-            'short':           1,
-            'expensive-gear':  1,
-            'basic-gear':      0,
-            'extreme':         1,
-            'chill':           0
         }
     }
 ];
@@ -119,31 +118,31 @@ const companies = [
 const questions = [
     {
         type: "options",
-        question: "כמה זמן בערך תנדוד בחו\"ל?",
+        question: "Roughly how long will you be abroad?",
         options: [
-            { text: "מעל חצי שנה (דרום אמריקה, המזרח, כו')", val: "long" },
-            { text: "עד שלושה חודשים (אירופה / קצר)", val: "short" }
+            { text: "Over 6 months (Ongoing, Backpacking, etc.)", val: "long" },
+            { text: "Under 3 months (Short trips, Vacations)", val: "short" }
         ]
     },
     {
         type: "options",
-        question: "הבנתי. ובוא נדבר על הציוד שלך:",
+        question: "Got it. Let's talk about your gear:",
         options: [
-            { text: "לקחתי ציוד יקר — לפטופ, מצלמה, רחפן", val: "expensive-gear" },
-            { text: "זורם קליל, רק אני והסמארטפון", val: "basic-gear" }
+            { text: "I carry expensive tech (Laptop, Camera, Drone)", val: "expensive-gear" },
+            { text: "Traveling light, just me and my smartphone", val: "basic-gear" }
         ]
     },
     {
         type: "options",
-        question: "האם מתוכנן ספורט אתגרי בטיול?",
+        question: "Are you planning any extreme sports?",
         options: [
-            { text: "כן! צלילה, רכיבה, טרקים, גלישה...", val: "extreme" },
-            { text: "לא, טיול רגיל ורגוע בלי סיכונים", val: "chill" }
+            { text: "Yes! Scuba, Surfing, Trekking, Motorbikes...", val: "extreme" },
+            { text: "No, just standard sightseeing & chilling", val: "chill" }
         ]
     },
     {
         type: "text",
-        question: "שאלה אחרונה! יש פרט נוסף שחשוב שנדע לפני שנמליץ? (מצב רפואי, יעד ספציפי, תקציב)"
+        question: "Last question! Anything else we should know? (Pre-existing medical conditions, specific destinations, etc.)"
     }
 ];
 
@@ -155,30 +154,23 @@ let currentAffiliateUrl = '#';
 // MEDICAL KEYWORD DETECTION
 // ============================================================
 const medicalKeywords = [
-    // General medical
-    'רפואי', 'מחלה', 'מחלת', 'תרופה', 'תרופות', 'אשפוז', 'אשפוזיזאציה', 'ניתוח',
-    'כרוני', 'כרונית', 'מצב רפואי',
-    // Conditions
-    'סכרת', 'לב', 'לבבי', 'אסתמה', 'אסתמא', 'אלרג', 'אלרגי', 'אלרגיה',
-    'לחץ דם', 'כולסטרול', 'סרטן', 'אפילפסיה', 'צליאה',
-    'דיכאון', 'דיכאוני', 'כבד', 'כליית',
-    // English keywords (some users type in English)
-    'medical', 'allergy', 'diabetes', 'asthma', 'heart', 'medication', 'chronic', 'surgery'
+    'medical', 'allergy', 'diabetes', 'asthma', 'heart', 'medication', 
+    'chronic', 'surgery', 'disease', 'condition', 'hospital', 'doctor', 
+    'prescription', 'cancer', 'blood pressure'
 ];
 
 function detectMedicalContext(freeText) {
-    if (!freeText || freeText === 'אין מה להוסיף') return false;
+    if (!freeText || freeText.toLowerCase() === 'no' || freeText.toLowerCase() === 'nothing') return false;
     const lower = freeText.toLowerCase();
     
-    // Check if any medical keyword exists
-    const hasKeyword = medicalKeywords.some(kw => lower.includes(kw.toLowerCase()));
+    const hasKeyword = medicalKeywords.some(kw => lower.includes(kw));
     
     if (hasKeyword) {
-        // Ignore if user explicitly negates
-        const negations = ['אין', 'לא', 'ללא', 'בלי', 'בריא', 'תקין'];
+        // Ignore negations
+        const negations = ['no', 'none', 'without', 'healthy', 'don\'t have', 'dont have'];
         const looksLikeNegation = negations.some(neg => lower.includes(neg));
         if (looksLikeNegation) {
-            return false; // Assumed false positive ("אין לי בעיות לב")
+            return false;
         }
         return true;
     }
@@ -189,18 +181,16 @@ function detectMedicalContext(freeText) {
 // SCORING ENGINE
 // ============================================================
 function calculateTopThree() {
-    const freeText = answersData['q3'] || '';
+    const freeText = answersData[`q${questions.length - 1}`] || '';
     const hasMedical = detectMedicalContext(freeText);
 
     const medicalAdjustments = {
-        // PassportCard: pays directly, can include pre-existing with right plan
-        'passportcard': +2,
-        // World Nomads: has pre-existing condition options
-        'worldnomads': +1,
-        // SafetyWing: explicitly excludes pre-existing conditions by default
-        'safetywing': -3,
-        // הפניקס: standard policy excludes pre-existing
-        'phoenix': -1,
+        'heymondo': +3,  // Great medical app
+        'genki': +4,     // Actual health insurance
+        'img': +2,
+        'safetywing': -2, // Travel medical only (limited pre-existing)
+        'faye': 0,
+        'worldnomads': 0
     };
 
     const scored = companies.map(company => {
@@ -210,24 +200,51 @@ function calculateTopThree() {
                 score += company.scores[val];
             }
         });
-        // Apply medical adjustment if user mentioned a medical condition
+        
+        // Apply medical adjustments
         if (hasMedical && medicalAdjustments[company.id] !== undefined) {
             score += medicalAdjustments[company.id];
         }
         return { ...company, score };
     });
 
-    // Sort descending by score
     scored.sort((a, b) => b.score - a.score);
     return { topThree: scored.slice(0, 3), hasMedical };
 }
 
 // ============================================================
-// QUIZ LOGIC
+// EVENT LISTENERS & UI LOGIC
 // ============================================================
+document.addEventListener('DOMContentLoaded', () => {
+    const startBtn = document.getElementById('startBtn');
+    const goBackBtn = document.getElementById('goBackBtn');
+    const restartBtn = document.getElementById('restartBtn');
+    const closeModalBtn = document.getElementById('closeModal');
+    const affiliateCtaBtn = document.getElementById('affiliateCtaBtn');
+
+    if (startBtn) startBtn.addEventListener('click', startQuiz);
+    if (goBackBtn) goBackBtn.addEventListener('click', goBack);
+    if (restartBtn) restartBtn.addEventListener('click', restartQuiz);
+    if (closeModalBtn) closeModalBtn.addEventListener('click', closeLeadModal);
+    
+    // Close modal on outside click
+    const leadModal = document.getElementById('leadModal');
+    if (leadModal) {
+        leadModal.addEventListener('click', function(e) {
+            if (e.target === this) closeLeadModal();
+        });
+    }
+
+    if (affiliateCtaBtn) {
+        affiliateCtaBtn.addEventListener('click', () => {
+            // User clicked outbound affiliate link
+            closeLeadModal();
+        });
+    }
+});
+
 function startQuiz() {
-    switchScreen('welcomeScreen', 'chatContainer');
-    document.getElementById('subtitle').innerText = 'שאלון התאמה';
+    switchScreen('welcome-screen', 'chat-screen');
     askQuestion();
     updateProgress();
 }
@@ -236,7 +253,8 @@ function updateProgress() {
     const totalSteps = questions.length + 1;
     const step = currentQuestion + 1;
     const percentage = (step / totalSteps) * 100;
-    document.getElementById('progressBar').style.width = percentage + "%";
+    const pb = document.getElementById('progressBar');
+    if (pb) pb.style.width = percentage + "%";
 }
 
 function askQuestion() {
@@ -245,33 +263,28 @@ function askQuestion() {
         return;
     }
 
-    // Toggle back button
-    const backBtn = document.getElementById('backBtn');
-    if (backBtn) {
-        if (currentQuestion > 0) {
-            backBtn.classList.remove('hidden');
-        } else {
-            backBtn.classList.add('hidden');
-        }
+    // Handle Back Button Visibility
+    const goBackBtn = document.getElementById('goBackBtn');
+    if (goBackBtn) {
+        if (currentQuestion > 0) goBackBtn.style.display = 'flex';
+        else goBackBtn.style.display = 'none';
     }
 
     const qData = questions[currentQuestion];
-    document.getElementById('chatOptionsGrid').innerHTML = "";
+    const optionsContainer = document.getElementById('optionsContainer');
+    optionsContainer.innerHTML = "";
 
-    const typingInd = document.getElementById('typingIndicator');
-    typingInd.classList.remove('hidden');
+    // Show Typing Indicator
+    showTypingIndicator();
     scrollToBottom();
 
     setTimeout(() => {
-        typingInd.classList.add('hidden');
+        hideTypingIndicator();
         appendMessage('bot', qData.question);
         renderOptions(qData, currentQuestion);
-    }, 420);
+    }, 450);
 }
 
-// ============================================================
-// GO BACK LOGIC
-// ============================================================
 function goBack() {
     if (currentQuestion === 0) return;
     
@@ -284,60 +297,69 @@ function goBack() {
 }
 
 function rebuildChatHistory() {
-    const history = document.getElementById('chatHistory');
-    history.innerHTML = '';
+    const chatbox = document.getElementById('chatbox');
+    chatbox.innerHTML = '';
     
     for (let i = 0; i < currentQuestion; i++) {
-        // Append bot question
-        const botBubble = document.createElement("div");
-        botBubble.className = "chat-bubble bot";
-        botBubble.innerText = questions[i].question;
-        history.appendChild(botBubble);
+        appendMessage('bot', questions[i].question);
         
-        // Append user answer
         if (answersData[`q${i}`]) {
             let userText = answersData[`q${i}`];
             if (questions[i].type === 'options') {
                 const opt = questions[i].options.find(o => o.val === userText);
                 if (opt) userText = opt.text;
             }
-            const userBubble = document.createElement("div");
-            userBubble.className = "chat-bubble user";
-            userBubble.innerText = userText;
-            history.appendChild(userBubble);
+            appendMessage('user', userText);
         }
     }
-    
+}
+
+function showTypingIndicator() {
+    const chatbox = document.getElementById('chatbox');
+    let typingInd = document.getElementById('typingIndicator');
+    if (!typingInd) {
+        typingInd = document.createElement('div');
+        typingInd.id = 'typingIndicator';
+        typingInd.className = 'typing-indicator hidden';
+        typingInd.innerHTML = '<span></span><span></span><span></span>';
+        chatbox.appendChild(typingInd);
+    }
+    typingInd.classList.remove('hidden');
+    chatbox.appendChild(typingInd); // ensure it's at the bottom
+}
+
+function hideTypingIndicator() {
     const typingInd = document.getElementById('typingIndicator');
-    history.appendChild(typingInd);
+    if (typingInd) typingInd.classList.add('hidden');
 }
 
 function appendMessage(sender, text) {
-    const history = document.getElementById('chatHistory');
+    const chatbox = document.getElementById('chatbox');
     const bubble = document.createElement("div");
     bubble.className = `chat-bubble ${sender}`;
     bubble.innerText = text;
-    history.appendChild(bubble);
+    chatbox.appendChild(bubble);
 
-    // Keep typing indicator at the bottom of the history
     const typingInd = document.getElementById('typingIndicator');
-    history.appendChild(typingInd);
+    if (typingInd) chatbox.appendChild(typingInd);
 
     scrollToBottom();
 }
 
 function renderOptions(qData, qIndex) {
-    const grid = document.getElementById('chatOptionsGrid');
-    grid.innerHTML = "";
+    const container = document.getElementById('optionsContainer');
+    container.innerHTML = "";
 
     if (qData.type === "options") {
-        grid.style.flexDirection = 'column';
+        const grid = document.createElement('div');
+        grid.className = 'chat-options-grid';
+        
         qData.options.forEach(opt => {
             const btn = document.createElement("button");
             btn.className = "option-btn";
             btn.innerText = opt.text;
             btn.onclick = () => {
-                grid.innerHTML = "";
+                container.innerHTML = "";
                 appendMessage('user', opt.text);
                 answersData[`q${qIndex}`] = opt.val;
                 currentQuestion++;
@@ -346,20 +368,20 @@ function renderOptions(qData, qIndex) {
             };
             grid.appendChild(btn);
         });
+        container.appendChild(grid);
 
     } else if (qData.type === "text") {
-        grid.style.flexDirection = 'row';
-        grid.innerHTML = `
-            <div class="chat-input-wrapper">
-                <input type="text" id="freeTextInput" class="chat-text-input" placeholder="הקלד כאן (או לחץ שלח כדי לדלג)...">
-                <button class="chat-send-btn" id="sendBtn" aria-label="שלח">➤</button>
+        container.innerHTML = `
+            <div class="chat-input-wrapper" style="width:100%; display:flex; gap:10px;">
+                <input type="text" id="freeTextInput" class="chat-text-input" placeholder="Type here (or hit Send to skip)...">
+                <button class="chat-send-btn" id="sendBtn" aria-label="Send">➤</button>
             </div>
         `;
 
         const submitText = () => {
             const input = document.getElementById('freeTextInput');
-            const val = input.value.trim() || 'אין מה להוסיף';
-            grid.innerHTML = "";
+            const val = input.value.trim() || 'No';
+            container.innerHTML = "";
             appendMessage('user', val);
             answersData[`q${qIndex}`] = val;
             currentQuestion++;
@@ -367,48 +389,46 @@ function renderOptions(qData, qIndex) {
             askQuestion();
         };
 
-        document.getElementById('sendBtn').onclick = submitText;
-        document.getElementById('freeTextInput').addEventListener('keypress', e => {
-            if (e.key === 'Enter') submitText();
-        });
-
-        setTimeout(() => {
-            const input = document.getElementById('freeTextInput');
-            if (input) input.focus();
-        }, 100);
+        const sendBtn = document.getElementById('sendBtn');
+        const textInput = document.getElementById('freeTextInput');
+        
+        if (sendBtn) sendBtn.onclick = submitText;
+        if (textInput) {
+            textInput.addEventListener('keypress', e => {
+                if (e.key === 'Enter') submitText();
+            });
+            setTimeout(() => textInput.focus(), 100);
+        }
     }
 }
 
 function scrollToBottom() {
-    const chatWrapper = document.getElementById('chatHistory');
-    chatWrapper.scrollTop = chatWrapper.scrollHeight;
+    // For mobile/desktop overflow matching
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
 }
 
 function finishQuiz() {
-    switchScreen('chatContainer', 'loadingScreen');
-    document.getElementById('subtitle').innerText = 'מצליב נתונים...';
+    switchScreen('chat-screen', 'loading-screen');
 
     setTimeout(() => {
         const { topThree, hasMedical } = calculateTopThree();
         renderResults(topThree, hasMedical);
 
-        switchScreen('loadingScreen', 'resultScreen');
-        document.getElementById('progressBar').style.width = "100%";
-        document.getElementById('subtitle').innerText = 'הנה 3 התוצאות שלך';
-
-        const h1 = document.querySelector('.card-header h1');
-        if (h1) h1.style.display = 'none';
+        switchScreen('loading-screen', 'results-screen');
+        const pb = document.getElementById('progressBar');
+        if (pb) pb.style.width = "100%";
     }, 2500);
 }
 
 // ============================================================
-// RESULT RENDERING (Dynamic!)
+// RESULT RENDERING
 // ============================================================
 function renderResults(topThree, hasMedical) {
-    const grid = document.getElementById('plansGrid');
-    grid.innerHTML = '';
+    const list = document.getElementById('recommendation-list');
+    if (!list) return;
+    list.innerHTML = '';
 
-    // Medical disclaimer banner
+    // Advanced Medical logic UI warning
     if (hasMedical) {
         const banner = document.createElement('div');
         banner.style.cssText = `
@@ -416,23 +436,28 @@ function renderResults(topThree, hasMedical) {
             border: 1px solid #f59e0b;
             border-radius: 10px;
             padding: 12px 16px;
-            margin-bottom: 8px;
+            margin-bottom: 20px;
             font-size: 13.5px;
             color: #92400e;
             line-height: 1.5;
-            text-align: right;
+            text-align: left;
         `;
         banner.innerHTML = `
-            <strong>⚠️ שים לב:</strong> ציינת מצב רפואי קודם. וודא שהביטוח שבחרת מכסה מצבות רפואיים קודם לנסיעה (pre-existing conditions) לפני הרכישה.
+            <strong>⚠️ Medical Note:</strong> You mentioned a health condition. We heavily weighted providers with great medical & pre-existing coverage, but please verify terms before purchasing.
         `;
-        grid.appendChild(banner);
+        list.appendChild(banner);
     }
+
+    const grid = document.createElement('div');
+    grid.className = 'plans-grid';
 
     topThree.forEach((company, index) => {
         const isFeatured = index === 0;
         const card = document.createElement('div');
         card.className = `plan-card clickable${isFeatured ? ' featured' : ''}`;
         card.setAttribute('data-company-id', company.id);
+        
+        // Open the modal passing the company data
         card.onclick = () => openLeadModal(company.modalName, company.affiliateUrl);
 
         card.innerHTML = `
@@ -442,156 +467,52 @@ function renderResults(topThree, hasMedical) {
         `;
         grid.appendChild(card);
     });
+    
+    list.appendChild(grid);
 }
 
 // ============================================================
-// SCREEN SWITCHING
+// UTILS & MODAL
 // ============================================================
 function switchScreen(hideId, showId) {
     const hideEl = document.getElementById(hideId);
     const showEl = document.getElementById(showId);
-    hideEl.classList.remove('active');
-    hideEl.classList.add('hidden');
-    showEl.classList.remove('hidden');
-    showEl.classList.add('active');
-}
-
-// ============================================================
-// MODAL LOGIC
-// ============================================================
-// Store original modal HTML once DOM is ready, so we can reset it after thank-you
-let originalModalHTML = '';
-document.addEventListener('DOMContentLoaded', () => {
-    originalModalHTML = document.querySelector('.modal').innerHTML;
-});
-// Fallback: store synchronously too (in case script runs after DOMContentLoaded)
-if (document.readyState !== 'loading') {
-    originalModalHTML = document.querySelector('.modal').innerHTML;
+    if(hideEl) hideEl.classList.remove('active');
+    if(showEl) showEl.classList.add('active');
 }
 
 function openLeadModal(companyName, affiliateUrl) {
-    // Restore original modal content in case it was replaced by thank-you
-    if (originalModalHTML) {
-        document.querySelector('.modal').innerHTML = originalModalHTML;
-        // Re-attach form submit listener after restoring HTML
-        attachLeadFormListener();
-    }
-    document.getElementById('selectedCompany').innerText = companyName;
-    // Populate hidden fields for Netlify Forms
-    const hiddenCompany = document.getElementById('hiddenCompany');
-    const hiddenAnswers = document.getElementById('hiddenAnswers');
-    if (hiddenCompany) hiddenCompany.value = companyName;
-    if (hiddenAnswers) hiddenAnswers.value = JSON.stringify(answersData);
-    currentAffiliateUrl = affiliateUrl || '#';
-    document.getElementById('leadModal').classList.remove('hidden');
+    document.getElementById('companyNameSpan').innerText = companyName;
+    document.getElementById('ctaCompanyName').innerText = companyName;
+    
+    const ctaBtn = document.getElementById('affiliateCtaBtn');
+    if(ctaBtn) ctaBtn.href = affiliateUrl;
+    
+    document.getElementById('leadModal').style.display = 'flex';
     document.body.style.overflow = 'hidden';
 }
 
 function closeLeadModal() {
-    document.getElementById('leadModal').classList.add('hidden');
+    document.getElementById('leadModal').style.display = 'none';
     document.body.style.overflow = '';
 }
 
-// Close modal on overlay click
-document.getElementById('leadModal').addEventListener('click', function(e) {
-    if (e.target === this) closeLeadModal();
-});
-
-function goToAffiliate() {
-    window.open(currentAffiliateUrl, '_blank');
-    closeLeadModal();
-}
-
-// ============================================================
-// LEAD FORM SUBMIT
-// ============================================================
-function attachLeadFormListener() {
-    const form = document.getElementById('leadForm');
-    if (!form) return;
-    form.addEventListener('submit', handleLeadFormSubmit);
-}
-
-function handleLeadFormSubmit(e) {
-    e.preventDefault();
-
-    const name = document.getElementById('name').value.trim();
-    const phone = document.getElementById('modalPhone').value.trim();
-    const phoneInput = document.getElementById('modalPhone');
-    const phoneError = document.getElementById('phoneError');
-    const selectedCo = document.getElementById('selectedCompany').innerText;
-
-    // Phone validation (Israeli: 9-10 digits)
-    const cleanPhone = phone.replace(/\D/g, '');
-    if (cleanPhone.length < 9 || cleanPhone.length > 10) {
-        phoneInput.style.borderColor = '#e53e3e';
-        if (phoneError) phoneError.classList.remove('hidden');
-        phoneInput.focus();
-        return;
-    }
-    phoneInput.style.borderColor = '';
-    if (phoneError) phoneError.classList.add('hidden');
-
-    // Submit to Netlify Forms via fetch
-    const formData = new FormData();
-    formData.append('form-name', 'lead-form');
-    formData.append('name', name);
-    formData.append('phone', phone);
-    formData.append('company', selectedCo);
-    formData.append('answers', JSON.stringify(answersData));
-
-    fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(formData).toString()
-    }).catch(err => console.log('Netlify Forms submit:', err));
-
-    // Show thank-you inside modal (replaces modal content)
-    document.querySelector('.modal').innerHTML = `
-        <div style="text-align: center; padding: 15px 0;">
-            <div style="font-size: 52px; margin-bottom: 18px;">✅</div>
-            <h3 style="font-size: 22px; margin-bottom: 12px; color: var(--text-main);">קיבלנו, ${name}!</h3>
-            <p style="color: var(--text-muted); line-height: 1.6; font-size: 15px;">
-                נציג יחזור אליך למספר<br>
-                <strong style="color: var(--text-main);">${phone}</strong><br>
-                בנוגע ל-<strong style="color: var(--primary);">${selectedCo}</strong> בהקדם האפשרי.
-            </p>
-            <button class="primary-btn" style="margin-top: 28px;" onclick="closeLeadModal()">מצוין, תודה!</button>
-        </div>
-    `;
-}
-
-// Initial attachment
-attachLeadFormListener();
-
-// ============================================================
-// RESTART
-// ============================================================
 function restartQuiz() {
     currentQuestion = 0;
     answersData = {};
     currentAffiliateUrl = '#';
 
-    const backBtn = document.getElementById('backBtn');
-    if (backBtn) backBtn.classList.add('hidden');
+    document.getElementById('chatbox').innerHTML = '';
+    document.getElementById('optionsContainer').innerHTML = '';
 
-    // Reset chat
-    document.getElementById('chatHistory').innerHTML = '';
-    document.getElementById('chatOptionsGrid').innerHTML = '';
+    const pb = document.getElementById('progressBar');
+    if (pb) pb.style.width = '0%';
 
-    // Reset header
-    const h1 = document.querySelector('.card-header h1');
-    if (h1) h1.style.display = '';
-
-    document.getElementById('progressBar').style.width = '0%';
-    document.getElementById('subtitle').innerText = '4 שאלות. 3 תוצאות.';
-
-    // Navigate back to welcome
-    ['chatContainer', 'loadingScreen', 'resultScreen'].forEach(id => {
+    ['chat-screen', 'loading-screen', 'results-screen'].forEach(id => {
         const el = document.getElementById(id);
-        el.classList.remove('active');
-        el.classList.add('hidden');
+        if(el) el.classList.remove('active');
     });
-    const welcome = document.getElementById('welcomeScreen');
-    welcome.classList.remove('hidden');
-    welcome.classList.add('active');
+    
+    const welcome = document.getElementById('welcome-screen');
+    if(welcome) welcome.classList.add('active');
 }

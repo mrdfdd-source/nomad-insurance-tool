@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Lead Finder - Nomad Insurance</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; font-family: 'Inter', sans-serif; margin: 0; padding: 0; }
+        body { background: #f3f4f6; color: #111827; padding: 40px 20px; }
+        .dashboard { max-width: 900px; margin: 0 auto; background: white; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); overflow: hidden; }
+        .header { background: #111827; color: white; padding: 30px; text-align: center; }
+        .header h1 { font-size: 28px; margin-bottom: 8px; }
+        .header p { color: #9ca3af; font-size: 15px; }
+        .controls { padding: 30px; background: #fafafa; border-bottom: 1px solid #e5e7eb; display: flex; gap: 15px; align-items: flex-end; flex-wrap: wrap; }
+        .input-group { flex: 1; min-width: 250px; display: flex; flex-direction: column; gap: 8px; }
+        .input-group label { font-size: 13px; font-weight: 600; color: #4b5563; text-transform: uppercase; letter-spacing: 0.5px; }
+        input, select { padding: 14px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 15px; outline: none; }
+        input:focus, select:focus { border-color: #2D5016; box-shadow: 0 0 0 3px rgba(45, 80, 22, 0.1); }
+        .primary-btn { background: #2D5016; color: white; border: none; padding: 14px 24px; border-radius: 8px; font-weight: 600; font-size: 15px; cursor: pointer; transition: all 0.2s; height: 50px; }
+        .primary-btn:hover { background: #1f3710; }
+        .primary-btn:disabled { background: #9ca3af; cursor: not-allowed; }
+        .results-area { padding: 30px; }
+        .status-text { margin-bottom: 20px; font-weight: 500; color: #6b7280; font-size: 15px; }
+        
+        .lead-card { border: 1px solid #e5e7eb; border-radius: 12px; padding: 20px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; transition: all 0.2s; background: white; }
+        .lead-card:hover { border-color: #d1d5db; box-shadow: 0 4px 12px rgba(0,0,0,0.03); transform: translateY(-2px); }
+        .lead-info { flex: 1; padding-right: 20px; }
+        .lead-title { font-size: 17px; font-weight: 600; color: #111827; margin-bottom: 8px; line-height: 1.4; }
+        .lead-meta { display: flex; gap: 15px; font-size: 13px; color: #6b7280; }
+        .meta-badge { background: #f3f4f6; padding: 4px 10px; border-radius: 20px; font-weight: 500; }
+        .subreddit-badge { background: #fee2e2; color: #991b1b; }
+        .cta-btn { background: #eff6ff; color: #1d4ed8; text-decoration: none; padding: 10px 18px; border-radius: 8px; font-weight: 600; font-size: 14px; transition: all 0.2s; white-space: nowrap; }
+        .cta-btn:hover { background: #dceafe; color: #1e3a8a; }
+        
+        .spinner { display: inline-block; width: 20px; height: 20px; border: 3px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: white; animation: spin 1s ease-in-out infinite; margin-right: 8px; vertical-align: middle; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+    <div class="dashboard">
+        <div class="header">
+            <h1>🎯 Reddit Lead Sniper</h1>
+            <p>Automatically hunt for users asking about travel/nomad insurance globally.</p>
+        </div>
+        
+        <div class="controls">
+            <div class="input-group">
+                <label>Target Keywords</label>
+                <input type="text" id="queryInput" value="travel insurance OR digital nomad insurance OR best insurance lapop" placeholder="e.g. travel insurance">
+            </div>
+            <div class="input-group" style="flex: 0.5;">
+                <label>Time Filter</label>
+                <select id="timeFilter">
+                    <option value="day">Past 24 Hours</option>
+                    <option value="week" selected>Past Week</option>
+                    <option value="month">Past Month</option>
+                </select>
+            </div>
+            <button class="primary-btn" id="searchBtn">Start Hunting 🚀</button>
+        </div>
+
+        <div class="results-area">
+            <div class="status-text" id="statusText">Ready to hunt. Click start to scan Reddit.</div>
+            <div id="resultsList">
+                <!-- Data will populate here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const searchBtn = document.getElementById('searchBtn');
+        const statusText = document.getElementById('statusText');
+        const resultsList = document.getElementById('resultsList');
+
+        searchBtn.addEventListener('click', async () => {
+            const query = document.getElementById('queryInput').value.trim();
+            const timeFilter = document.getElementById('timeFilter').value;
+            
+            if (!query) return;
+
+            // UI Loading state
+            searchBtn.disabled = true;
+            searchBtn.innerHTML = '<div class="spinner"></div> Hunting...';
+            statusText.innerText = `Scraping Reddit global databases for "${query}"...`;
+            resultsList.innerHTML = '';
+
+            try {
+                // Public Reddit API endpoint (No Auth Required)
+                const url = `https://www.reddit.com/search.json?q=${encodeURIComponent(query)}&t=${timeFilter}&sort=new&limit=25`;
+                const response = await fetch(url);
+                const data = await response.json();
+
+                const posts = data.data.children;
+
+                if (posts.length === 0) {
+                    statusText.innerText = 'No fresh leads found. Try a different keyword or expand the timeframe.';
+                } else {
+                    statusText.innerText = `🔥 Found ${posts.length} warm leads! Drop your funnel link in these conversations:`;
+                    
+                    posts.forEach(child => {
+                        const p = child.data;
+                        const date = new Date(p.created_utc * 1000).toLocaleDateString() + ' ' + new Date(p.created_utc * 1000).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                        
+                        const card = document.createElement('div');
+                        card.className = 'lead-card';
+                        card.innerHTML = `
+                            <div class="lead-info">
+                                <h3 class="lead-title">${p.title}</h3>
+                                <div class="lead-meta">
+                                    <span class="meta-badge subreddit-badge">r/${p.subreddit}</span>
+                                    <span class="meta-badge">🗓️ ${date}</span>
+                                    <span class="meta-badge">💬 ${p.num_comments} replies</span>
+                                </div>
+                            </div>
+                            <a href="https://www.reddit.com${p.permalink}" class="cta-btn" target="_blank" rel="noopener">Jump to Conversation &rarr;</a>
+                        `;
+                        resultsList.appendChild(card);
+                    });
+                }
+            } catch (err) {
+                console.error(err);
+                statusText.innerText = '🚨 Error fetching data from Reddit. Try again in a few minutes.';
+            } finally {
+                searchBtn.disabled = false;
+                searchBtn.innerHTML = 'Start Hunting 🚀';
+            }
+        });
+    </script>
+</body>
+</html>
