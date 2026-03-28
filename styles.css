@@ -592,7 +592,7 @@ body {
         padding: 16px 20px;
     }
     .chat-wrapper {
-        height: 480px; /* Taller chat box for an immersive app feel */
+        min-height: 200px;
     }
     .primary-btn {
         padding: 20px 28px;
