@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ביטוח לנוודים דיגיטליים - התאמה אישית</title>
+    <meta name="description" content="מצא את ביטוח הנסיעות המותאם בדיוק ליעד ולציוד שלך בשאלות פשוטות.">
+    <!-- Main font (Heebo) + Specific fonts for companies (Assistant, Poppins) -->
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&family=Assistant:wght@700;800&family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Progress Bar -->
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="progressBar" style="width: 0%;"></div>
+        </div>
+
+        <!-- Main Content Box -->
+        <main class="card">
+            <header class="card-header">
+                <button id="backBtn" class="back-btn hidden" onclick="goBack()" aria-label="חזור אחורה">&#8594; חזור</button>
+                <h1>ביטוח נוודים דיגיטליים</h1>
+                <p class="subtitle" id="subtitle">4 שאלות. 3 תוצאות.</p>
+            </header>
+
+            <div class="content-area" id="contentArea">
+                <!-- Welcome Screen -->
+                <div id="welcomeScreen" class="screen active">
+                    <div class="warm-intro-box">
+                        <p class="welcome-text" style="font-size: 18px; line-height: 1.5; font-weight: 500;">
+                            בלי טפסים נוראיים ובלי מילים מסובכות.<br>לחץ לקבלת הצעות שמתאימות לך!
+                        </p>
+                    </div>
+                    <button class="primary-btn" onclick="startQuiz()">התחל התאמה אישית</button>
+                    <p class="trust-badge">סורקים באופן אובייקטיבי עשרות חבילות מקומיות ובינלאומיות</p>
+                </div>
+
+                <!-- Chat Container -->
+                <div id="chatContainer" class="screen hidden chat-wrapper">
+                    <div id="chatHistory" class="chat-history">
+                        <!-- Chat messages injected by JS -->
+                    </div>
+                    <!-- Typing Indicator -->
+                    <div id="typingIndicator" class="typing-indicator hidden">
+                        <span></span><span></span><span></span>
+                    </div>
+                    <!-- Options/Input displayed at bottom -->
+                    <div class="chat-options-grid" id="chatOptionsGrid">
+                        <!-- Options injected by JS -->
+                    </div>
+                </div>
+
+                <!-- Loading / AI Analysis Screen -->
+                <div id="loadingScreen" class="screen hidden text-center">
+                    <div class="spinner"></div>
+                    <h2 class="friendly-question">מצליבים נתונים...</h2>
+                    <p class="loading-sub">מוודאים שלא סתם תשלם על כיסויים שאתה לא צריך...</p>
+                </div>
+
+                <!-- Result Screen -->
+                <div id="resultScreen" class="screen hidden text-center">
+                    <h2 class="friendly-question">יש לנו מאצ'!</h2>
+                    <p class="result-desc">אלו 3 החברות המשתלמות ביותר לנתונים שהזנת. <br><strong>לחץ על החברה לקבלת פרטים:</strong></p>
+                    
+                    <div class="plans-grid" id="plansGrid">
+                        <!-- Plan cards injected dynamically by app.js based on quiz answers -->
+                    </div>
+                    
+                    <button class="secondary-btn" onclick="restartQuiz()">התחל מחדש</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Transparency Disclaimer -->
+        <p class="disclaimer-text">
+            <strong>גילוי נאות (Affiliate Disclosure):</strong> אתר זה משתתף בתוכנית השגרירים של SafetyWing ותוכניות אפיליאייט נוספות. אנו עשויים לקבל עמלה ללא עלות נוספת עבורך כאשר אתה רוכש ביטוח דרך הקישורים באתר. ההמלצות נקבעות על ידי אלגוריתם אובייקטיבי בלבד, ללא השפעת הגורם הכספי.
+        </p>
+
+        <!-- Lead Form Modal Popup -->
+        <div id="leadModal" class="modal-overlay hidden">
+            <div class="modal">
+                <button class="close-btn" onclick="closeLeadModal()">&times;</button>
+                <div class="modal-header">
+                    <h3>בחירה מצוינת! בחרת ב-<br><span id="selectedCompany" class="highlight-company"></span></h3>
+                    
+                    <!-- Direct Affiliate Link (CPA) -->
+                    <div style="border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin: 25px 0;">
+                        <p style="font-size: 14px; margin-bottom: 12px; color: var(--text-main); font-weight: 500;">לרכישת אונליין מהירה (ללא המתנה לנציג):</p>
+                        <button class="primary-btn" onclick="goToAffiliate()">לרכישת הביטוח לחץ כאן</button>
+                    </div>
+                    
+                    <div style="margin: 15px 0; border-top: 1px solid var(--border); position: relative;">
+                        <span style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: white; padding: 0 10px; font-size: 13px; color: var(--text-muted);">או</span>
+                    </div>
+
+                    <!-- Lead Form (CPL) - Transmits API automatically -->
+                    <p style="font-size: 14px; color: var(--text-main); margin-bottom: 6px; font-weight: 500;">מעדיף שנציג מרכז השירות יחזור אליך להתאמה?</p>
+                    <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">פרטיך יועברו לחברה שבחרת בלבד.</p>
+                </div>
+                <form id="leadForm" class="lead-form" style="margin-top: 5px;" name="lead-form" data-netlify="true">
+                    <input type="hidden" name="form-name" value="lead-form">
+                    <input type="text" id="name" name="name" placeholder="שם מלא" required>
+                    <input type="tel" id="modalPhone" name="phone" placeholder="טלפון לחזרה" required>
+                    <p id="phoneError" class="error-text hidden">אנא הזן מספר חוקי בן 9-10 ספרות</p>
+                    <input type="hidden" id="hiddenCompany" name="company" value="">
+                    <input type="hidden" id="hiddenAnswers" name="answers" value="">
+                    <button type="submit" class="primary-btn">דברו איתי עכשיו</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden form for Netlify Forms detection (required for dynamic forms) -->
+    <form name="lead-form" data-netlify="true" netlify-honeypot="bot-field" hidden>
+        <input type="hidden" name="form-name" value="lead-form">
+        <input name="bot-field">
+        <input type="text" name="name">
+        <input type="tel" name="phone">
+        <input type="text" name="company">
+        <input type="hidden" name="answers">
+    </form>
+
+    <script src="app.js"></script>
+</body>
+</html>
