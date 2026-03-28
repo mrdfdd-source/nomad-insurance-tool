@@ -495,15 +495,11 @@ function switchScreen(hideId, showId) {
 function openLeadModal(companyName, affiliateUrl) {
     const header = document.getElementById('modalCompanyHeader');
     if (header) {
-        header.innerHTML = `<span class="highlight-company">${companyName}</span>`;
+        header.innerHTML = `<span class="highlight-company" style="font-size: 28px;">${companyName}</span>`;
     }
     
-    // Store affiliate URL for form submission completion
+    // Store affiliate URL globally
     window.currentAffiliateUrl = affiliateUrl;
-    
-    // Track selected company
-    const selectedCompanyInput = document.getElementById('selectedCompany');
-    if (selectedCompanyInput) selectedCompanyInput.value = companyName;
     
     const leadModal = document.getElementById('leadModal');
     if (leadModal) {
@@ -511,6 +507,12 @@ function openLeadModal(companyName, affiliateUrl) {
         leadModal.style.display = 'flex';
     }
     document.body.style.overflow = 'hidden';
+
+    // Auto-redirect after 2.5 seconds (Bridge logic)
+    setTimeout(() => {
+        window.open(window.currentAffiliateUrl, "_blank");
+        closeLeadModal();
+    }, 2500);
 }
 
 function closeLeadModal() {
@@ -522,43 +524,13 @@ function closeLeadModal() {
     document.body.style.overflow = '';
 }
 
-// Global Event Listeners for completely restored CPL logic
+// Global Event Listeners
 document.addEventListener('DOMContentLoaded', () => {
-    // Setup Modal Close hooks
-    const closeModalBtn = document.getElementById('closeModalBtn');
-    if (closeModalBtn) closeModalBtn.addEventListener('click', closeLeadModal);
-
-    // Click outside to close
+    // Click outside to close (optional, but good for UX if they want to cancel)
     const leadModal = document.getElementById('leadModal');
     if (leadModal) {
         leadModal.addEventListener('click', (e) => {
             if (e.target === leadModal) closeLeadModal();
-        });
-    }
-
-    // Lead Form Submit Handler
-    const leadForm = document.getElementById('leadForm');
-    if (leadForm) {
-        leadForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const btn = document.getElementById('modalSubmitBtn');
-            const originalText = btn.innerHTML;
-            btn.innerHTML = 'Connecting...';
-            
-            const formData = new FormData(this);
-            fetch("/", {
-                method: "POST",
-                headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: new URLSearchParams(formData).toString()
-            }).then(() => {
-                window.open(window.currentAffiliateUrl, "_blank");
-                closeLeadModal();
-                btn.innerHTML = originalText;
-            }).catch((error) => {
-                // Fallback direct navigation if fetch fails
-                window.open(window.currentAffiliateUrl, "_blank");
-                closeLeadModal();
-            });
         });
     }
 });

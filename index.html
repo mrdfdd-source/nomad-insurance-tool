@@ -84,31 +84,20 @@
         </div>
         </div>
 
-    <!-- Lead Capture / Affiliate Modal Overlay -->
+    <!-- Bridge Page Modal -->
     <div id="leadModal" class="modal-overlay hidden">
-        <div class="modal">
-            <button class="close-btn" id="closeModalBtn">&times;</button>
-            <div id="modalCompanyHeader" class="modal-header">
+        <div class="modal" style="padding: 50px 30px;">
+            <div class="spinner" id="transferSpinner" style="margin-bottom: 25px; border-top-color: var(--primary);"></div>
+            <h2 style="font-size: 22px; color: var(--text-main); margin-bottom: 10px;">Transferring you securely to...</h2>
+            <div id="modalCompanyHeader" class="modal-header" style="margin-bottom: 20px;">
                 <!-- Header injected by JS -->
             </div>
             
-            <form id="leadForm" name="global-lead" method="POST" data-netlify="true" style="margin-top: 15px; text-align: left;">
-                <input type="hidden" name="form-name" value="global-lead">
-                <input type="hidden" id="selectedCompany" name="selected_company" value="">
-                
-                <p style="font-size: 14.5px; color: var(--text-muted); margin-bottom: 20px; text-align: center; font-weight: 500;">
-                    Please enter your details to view your exact policy link.
-                </p>
-
-                <input type="text" id="userName" name="name" placeholder="First Name" class="chat-text-input" style="width:100%; margin-bottom: 12px; border: 2px solid var(--border);" required>
-                <input type="email" id="userEmail" name="email" placeholder="Email Address" class="chat-text-input" style="width:100%; margin-bottom: 22px; border: 2px solid var(--border);" required>
-                
-                <button type="submit" class="primary-btn block-btn" id="modalSubmitBtn" style="padding: 18px;">
-                    View My Policy &rarr;
-                </button>
-            </form>
+            <p style="font-size: 15px; color: var(--text-muted); line-height: 1.5;">
+                Applying your custom match variables.<br>Please wait a moment.
+            </p>
             
-            <p class="terms-text" style="font-size: 11px; color:#aaa; margin-top:15px;">By clicking, you securely transfer to the provider's official checkout.</p>
+            <p class="terms-text" style="font-size: 12px; color:#aaa; margin-top:25px;">You are being securely redirected to the provider's official website.</p>
         </div>
     </div>
 
