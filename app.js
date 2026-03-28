@@ -443,7 +443,7 @@ function renderResults(topThree, hasMedical) {
             text-align: left;
         `;
         banner.innerHTML = `
-            <strong>⚠️ Medical Note:</strong> You mentioned a health condition. We heavily weighted providers with great medical & pre-existing coverage, but please verify terms before purchasing.
+            <strong>Important Medical Note:</strong> You mentioned a health condition. We heavily weighted providers with great medical & pre-existing coverage, but please verify terms before purchasing.
         `;
         list.appendChild(banner);
     }
