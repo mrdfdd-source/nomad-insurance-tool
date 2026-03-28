@@ -493,20 +493,75 @@ function switchScreen(hideId, showId) {
 }
 
 function openLeadModal(companyName, affiliateUrl) {
-    document.getElementById('companyNameSpan').innerText = companyName;
-    document.getElementById('ctaCompanyName').innerText = companyName;
+    const header = document.getElementById('modalCompanyHeader');
+    if (header) {
+        header.innerHTML = `<span class="highlight-company">${companyName}</span>`;
+    }
     
-    const ctaBtn = document.getElementById('affiliateCtaBtn');
-    if(ctaBtn) ctaBtn.href = affiliateUrl;
+    // Store affiliate URL for form submission completion
+    window.currentAffiliateUrl = affiliateUrl;
     
-    document.getElementById('leadModal').style.display = 'flex';
+    // Track selected company
+    const selectedCompanyInput = document.getElementById('selectedCompany');
+    if (selectedCompanyInput) selectedCompanyInput.value = companyName;
+    
+    const leadModal = document.getElementById('leadModal');
+    if (leadModal) {
+        leadModal.classList.remove('hidden');
+        leadModal.style.display = 'flex';
+    }
     document.body.style.overflow = 'hidden';
 }
 
 function closeLeadModal() {
-    document.getElementById('leadModal').style.display = 'none';
+    const leadModal = document.getElementById('leadModal');
+    if (leadModal) {
+        leadModal.classList.add('hidden');
+        setTimeout(() => leadModal.style.display = 'none', 300); // Wait for fade out
+    }
     document.body.style.overflow = '';
 }
+
+// Global Event Listeners for completely restored CPL logic
+document.addEventListener('DOMContentLoaded', () => {
+    // Setup Modal Close hooks
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    if (closeModalBtn) closeModalBtn.addEventListener('click', closeLeadModal);
+
+    // Click outside to close
+    const leadModal = document.getElementById('leadModal');
+    if (leadModal) {
+        leadModal.addEventListener('click', (e) => {
+            if (e.target === leadModal) closeLeadModal();
+        });
+    }
+
+    // Lead Form Submit Handler
+    const leadForm = document.getElementById('leadForm');
+    if (leadForm) {
+        leadForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('modalSubmitBtn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = 'Connecting...';
+            
+            const formData = new FormData(this);
+            fetch("/", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: new URLSearchParams(formData).toString()
+            }).then(() => {
+                window.open(window.currentAffiliateUrl, "_blank");
+                closeLeadModal();
+                btn.innerHTML = originalText;
+            }).catch((error) => {
+                // Fallback direct navigation if fetch fails
+                window.open(window.currentAffiliateUrl, "_blank");
+                closeLeadModal();
+            });
+        });
+    }
+});
 
 function restartQuiz() {
     currentQuestion = 0;
@@ -520,7 +575,7 @@ function restartQuiz() {
     if (pb) pb.style.width = '0%';
     
     const sub = document.getElementById('subtitle');
-    if (sub) sub.innerText = '4 questions. 3 matches.';
+    if (sub) sub.innerText = '4 Questions. 3 Matches.';
     const h1 = document.getElementById('mainH1');
     if (h1) h1.style.display = '';
 
